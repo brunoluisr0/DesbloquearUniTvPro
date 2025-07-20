@@ -1,0 +1,25 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    - name: Build release APK
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+        wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
+        unzip gradle-7.6-bin.zip -d gradle
+        export PATH="$PWD/gradle/gradle-7.6/bin:$PATH"
+        ./gradlew assembleRelease
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: DesbloquearUniTvPro
+        path: app/build/outputs/apk/release/app-release.apk
