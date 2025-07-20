@@ -19,7 +19,7 @@ jobs:
         export PATH="$PWD/gradle/gradle-7.6/bin:$PATH"
         ./gradlew assembleRelease
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: DesbloquearUniTvPro
         path: app/build/outputs/apk/release/app-release.apk
