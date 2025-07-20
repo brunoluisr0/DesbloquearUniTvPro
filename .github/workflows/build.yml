@@ -11,13 +11,7 @@ jobs:
         distribution: 'temurin'
         java-version: '11'
     - name: Build release APK
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget unzip
-        wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
-        unzip gradle-7.6-bin.zip -d gradle
-        export PATH="$PWD/gradle/gradle-7.6/bin:$PATH"
-        ./gradlew assembleRelease
+      run: ./gradlew assembleRelease
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
